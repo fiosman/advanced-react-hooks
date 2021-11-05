@@ -11,6 +11,8 @@ function Counter({initialCount = 0, step = 1}) {
     switch (action.type) {
       case 'increment':
         return {count: state.count + 1}
+      case 'step':
+        return {count: state.count + step}
       default:
         return state
     }
@@ -18,10 +20,10 @@ function Counter({initialCount = 0, step = 1}) {
   const [state, dispatch] = React.useReducer(countReducer, {
     count: initialCount,
   })
-  const increment = () => {
-    dispatch({type: 'increment'})
+  const increment = val => {
+    dispatch({type: val})
   }
-  return <button onClick={increment}>{state.count}</button>
+  return <button onClick={() => increment('step')}>{state.count}</button>
 }
 
 function App() {
